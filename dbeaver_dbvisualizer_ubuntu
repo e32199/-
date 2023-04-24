@@ -1,5 +1,5 @@
 
-vim /opt/DbVisualizer/dbvis.vmoptions
+sudo vim /opt/DbVisualizer/dbvis.vmoptions
 -javaagent:/home/x/Videos/dbvisualizer-agent/dbvisualizer-agent.jar
 --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
 --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
@@ -8,7 +8,7 @@ cd /home/x/Videos/dbvisualizer-agent
 java -jar dbvisualizer-agent.jar -i x -n x -o x
 
 
-vim /usr/share/dbeaver-ee/dbeaver.ini
+sudo vim /usr/share/dbeaver-ee/dbeaver.ini
 
 -vm 
 /usr/lib/jvm/jdk-20/bin/java
