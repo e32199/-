@@ -4,6 +4,7 @@ vim /opt/DbVisualizer/dbvis.vmoptions
 --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
 --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
 
+cd /home/x/Videos/dbvisualizer-agent
 java -jar dbvisualizer-agent.jar -i x -n x -o x
 
 
