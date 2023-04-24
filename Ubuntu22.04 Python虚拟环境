@@ -1,0 +1,23 @@
+# Ubuntu22.04 Python虚拟环境
+sudo apt -y install python3-pip
+
+pip install --upgrade pip
+pip install setuptools
+pip install virtualenv
+pip install virtualenvwrapper
+
+rm -fr ~/.virtualenvs
+mkdir ~/.virtualenvs
+
+
+vim ~/.bashrc 
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_VIRTUALENV=$HOME/.local/bin/virtualenv
+source $HOME/.local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_ENV_BIN_DIR=local/bin
+
+source ~/.bashrc
+
+mkvirtualenv pydev
