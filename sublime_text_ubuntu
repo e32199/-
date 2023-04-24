@@ -4,7 +4,7 @@ https://hexed.it/
 C6 40 05 01 48 85 C9
 
 
-sudo mv /opt/sublime_text/sublime_text ./sublime_text.old
+sudo mv /opt/sublime_text/sublime_text{,.bak}
 cd $HOME/Downloads/
 chmod 755 sublime_text
 sudo chown root sublime_text
