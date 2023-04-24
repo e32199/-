@@ -7,6 +7,8 @@ cp /opt/StarUML/resources/app.asar /tmp/
 
 cd /tmp/
 
+asar extract app.asar app
+
 vim app/src/engine/license-manager.js
 
 // 修改验证许可的方法，使其验证成功，不提示
