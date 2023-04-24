@@ -1,0 +1,26 @@
+
+vim /opt/DbVisualizer/dbvis.vmoptions
+-javaagent:/home/x/Videos/dbvisualizer-agent/dbvisualizer-agent.jar
+--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
+--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
+
+java -jar dbvisualizer-agent.jar -i x -n x -o x
+
+
+vim /usr/share/dbeaver-ee/dbeaver.ini
+
+-vm 
+/usr/lib/jvm/jdk-20/bin/java
+
+
+-javaagent:/home/x/Videos/dbeaver-agent/dbeaver-agent.jar
+--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
+--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
+-Dlm.debug.mode=true
+
+
+aYhAFjjtp3uQZmeLzF3S4H6eTbOgmru0jxYErPCvgmkhkn0D8N2yY6ULK8oT3fnpoEu7GPny7csN
+sXL1g+D+8xR++/L8ePsVLUj4du5AMZORr2xGaGKG2rXa3NEoIiEAHSp4a6cQgMMbIspeOy7dYWX6
+99Fhtpnu1YBoTmoJPaHBuwHDiOQQk5nXCPflrhA7lldA8TZ3dSUsj4Sr8CqBQeS+2E32xwSniymK
+7fKcVX75qnuxhn7vUY7YL2UY7EKeN/AZ+1NIB6umKUODyOAFIc8q6zZT8b9aXqXVzwLJZxHbEgcO
+8lsQfyvqUgqD6clzvFry9+JwuQsXN0wW26KDQA==
