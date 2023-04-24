@@ -1,0 +1,42 @@
+########
+sudo apt-get install cmake -y
+sudo apt-get install libfmt-dev libssl-dev rapidjson-dev build-essential pkg-config -y
+
+cd /tmp/
+git clone -b linux --single-branch https://notabug.org/doublesine/navicat-keygen.git
+cd navicat-keygen
+
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . -- -j4
+
+cd /tmp/
+[ -d "navicat16-premium-cs" ] && rm -fr "navicat16-premium-cs"
+[ -d "navicat16-premium-cs-patched" ] && rm -fr "navicat16-premium-cs-patched"
+mkdir "navicat16-premium-cs"
+sudo mount -o loop ~/Downloads/navicat16-premium-cs.AppImage navicat16-premium-cs
+cp -r navicat16-premium-cs navicat16-premium-cs-patched
+sudo umount navicat16-premium-cs
+rm -rf navicat16-premium-cs
+
+cd /tmp/navicat-keygen/build/
+./navicat-patcher /tmp/navicat16-premium-cs-patched
+
+cd /tmp/
+wget 'https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage'
+chmod +x appimagetool-x86_64.AppImage
+
+sudo apt install libfuse2 -y
+./appimagetool-x86_64.AppImage navicat16-premium-cs-patched navicat16-premium-cs-patched.AppImage
+
+sudo chmod +x navicat16-premium-cs-patched.AppImage
+[ -d ~/soft/navicat ] || mkdir -pv ~/soft/navicat
+cp navicat16-premium-cs-patched.AppImage ~/soft/navicat/
+cd ~/soft/navicat/
+ls -al
+mv navicat16-premium-cs-patched.AppImage  navicat16-premium-cs.AppImage
+./navicat16-premium-cs.AppImage
+
+cd /tmp/navicat-keygen/build/
+./navicat-keygen --text ./RegPrivateKey.pem
