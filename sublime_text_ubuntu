@@ -10,3 +10,5 @@ chmod 755 sublime_text
 sudo chown root sublime_text
 sudo chgrp root sublime_text
 sudo mv sublime_text /opt/sublime_text/
+
+ll /opt/sublime_text/
