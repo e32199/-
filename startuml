@@ -1,24 +1,32 @@
+cd /tmp/
+npm install -g asar
 
-startuml
+ls -al /opt/StarUML/resources/app.asar
 
-https://www.jianshu.com/p/2d3f8aff64be
+cp /opt/StarUML/resources/app.asar /tmp/
 
+cd /tmp/
 
+vim app/src/engine/license-manager.js
 
+// 修改验证许可的方法，使其验证成功，不提示
+checkLicenseValidity () {
+  if (packageJSON.config.setappBuild) {
+    setStatus(this, true)
+  } else {
+    this.validate().then(() => {
+      setStatus(this, true)
+    }, () => {
+      setStatus(this,true)               // 新增
+      // setStatus(this, false)          // 注释掉
+      // UnregisteredDialog.showDialog() // 注释掉
+    })
+  }
+}
 
+rm -fr app.asar
+asar pack app app.asar
 
+sudo mv /opt/StarUML/resources/app.asar{,.bak}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\sudo cp /tmp/app.asar /opt/StarUML/resources/app.asar
