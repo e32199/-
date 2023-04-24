@@ -21,3 +21,32 @@ export VIRTUALENVWRAPPER_ENV_BIN_DIR=local/bin
 source ~/.bashrc
 
 mkvirtualenv pydev
+
+
+
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+source $HOME/.local/bin/virtualenvwrapper.sh
+
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_VIRTUALENV=$HOME/.local/bin/virtualenv
+source $HOME/.local/bin/virtualenvwrapper.sh
+
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
+source $HOME/.local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_ENV_BIN_DIR=bin
+
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
+source $HOME/.local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_ENV_BIN_DIR=local/bin
+
+
