@@ -1,0 +1,178 @@
+
+# dnf install java-11-openjdk java-11-openjdk-devel -y
+
+dnf install fontconfig -y
+dnf install -y google-noto-cjk-fonts google-noto-sans-cjk-fonts google-noto-serif-cjk-fonts
+#dnf install google-noto* -y
+
+java -version
+javac -version
+
+dnf install mysql-server mysql -y
+# systemctl start mysqld
+# systemctl enable mysqld
+
+systemctl enable --now mysqld
+systemctl status mysqld
+
+vim /etc/my.cnf.d/mysql-server.cnf
+
+character-set-server=utf8mb4
+collation-server=utf8mb4_bin
+default-storage-engine=INNODB
+max_allowed_packet=256M
+innodb_log_file_size=2GB
+sql_mode = NO_AUTO_VALUE_ON_ZERO
+transaction-isolation=READ-COMMITTED
+binlog_format=row
+log_bin_trust_function_creators = 1
+
+
+systemctl restart mysqld
+
+mysql_secure_installation
+
+alter user 'root'@'localhost' identified with mysql_native_password by 'qwer@123';
+flush privileges;
+
+create user root@'%' identified with mysql_native_password by 'qwer@123';
+grant all privileges on *.* to root@'%' with grant option;
+flush privileges;
+
+create database jira character set utf8mb4 collate utf8mb4_bin;
+create user 'jira'@'localhost' identified with mysql_native_password by 'qwer@123';
+grant all privileges on jira.* to 'jira'@'localhost' with grant option;
+flush privileges;
+exit;
+
+
+cd ~
+chmod +x atlassian*.bin
+
+# 安装jira
+# ...
+# ...
+# ...
+
+# wget https://github.com/haxqer/confluence/releases/download/v1.3.3/atlassian-agent.jar
+
+cp /root/atlassian-agent.jar /opt/atlassian/jira/bin/
+ll /opt/atlassian/jira/bin/ | grep atlassian-agent.jar
+
+ll /opt/atlassian/jira/bin/atlassian-agent.jar
+
+vim /opt/atlassian/jira/bin/setenv.sh
+export JAVA_OPTS="-javaagent:/opt/atlassian/jira/bin/atlassian-agent.jar ${JAVA_OPTS}"
+
+
+# wget https://cdn.mysql.com/archives/mysql-connector-java-8.0/mysql-connector-java-8.0.30.tar.gz
+# tar zxvf mysql-connector-java-8.0.30.tar.gz
+# cp mysql-connector-java-8.0.30/mysql-connector-java-8.0.30.jar /opt/atlassian/jira/lib/
+cp /root/mysql-connector-java-8.0.30.jar /opt/atlassian/jira/lib/
+ll /opt/atlassian/jira/lib/ | grep mysql
+
+
+vim /etc/systemd/system/jira.service
+
+[Unit]
+Description=Atlassian JIRA Software Server
+After=network.target mysqld.service
+
+[Service]
+Type=forking
+User=jira
+ExecStart=/opt/atlassian/jira/bin/start-jira.sh
+ExecStop=/opt/atlassian/jira/bin/stop-jira.sh
+ExecReload=/opt/atlassian/jira/bin/start-jira.sh | sleep 60 | /opt/atlassian/jira/bin/stop-jira.sh
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl daemon-reload
+
+/opt/atlassian/jira/bin/stop-jira.sh
+
+systemctl start jira
+systemctl enable jira
+
+
+cd /opt/atlassian/jira/bin/
+java -jar atlassian-agent.jar -p 'jira' -m mlkji@gmail.com -n x -o x -s BLAP-LIL4-74F3-FI0V
+
+java -jar atlassian-agent.jar -p 'conf' -m mlkji@gmail.com -n x -o x -s ABCD-1234-EFGH-5678
+java -jar atlassian-agent.jar -p 'stash' -m mlkji@gmail.com -n x -o x -s ABCD-1234-EFGH-5678
+
+
+https://gitee.com/gfly/atlassian-agent
+https://zhuanlan.zhihu.com/p/592059754
+https://www.cnblogs.com/fsckzy/p/16994798.html
+
+
+
+dnf install -y google-noto-cjk-fonts google-noto-sans-cjk-fonts google-noto-serif-cjk-fonts
+
+cd /tmp/
+dnf install mkfontscale -y
+
+
+cp /root/atlassian-agent.jar /opt/atlassian/confluence/bin/
+ll /opt/atlassian/confluence/bin/ | grep atlassian-agent.jar
+
+cp /root/mysql-connector-java-8.0.30.jar /opt/atlassian/confluence/lib/
+ll /opt/atlassian/confluence/lib/ | grep mysql
+
+vim /opt/atlassian/confluence/bin/setenv.sh
+export JAVA_OPTS="-javaagent:/opt/atlassian/confluence/bin/atlassian-agent.jar ${JAVA_OPTS}"
+
+
+
+vim /etc/systemd/system/confluence.service
+
+[Unit]
+Description=Atlassian CONFLUENCE Software Server
+After=network.target mysqld.service
+
+[Service]
+Type=forking
+User=confluence
+ExecStart=/opt/atlassian/confluence/bin/start-confluence.sh
+ExecStop=/opt/atlassian/confluence/bin/stop-confluence.sh
+ExecReload=/opt/atlassian/confluence/bin/start-confluence.sh | sleep 60 | /opt/atlassian/confluence/bin/stop-confluence.sh
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl daemon-reload
+
+/opt/atlassian/confluence/bin/stop-confluence.sh
+
+systemctl start confluence
+systemctl enable confluence
+
+cd /opt/atlassian/confluence/bin/
+java -jar atlassian-agent.jar -p 'conf' -m mlkji@gmail.com -n x -o x -s BGZD-6WQD-2QCJ-HW2W
+
+
+create database confluence character set utf8mb4 collate utf8mb4_bin;
+# create user 'jira'@'localhost' identified with mysql_native_password by 'qwer@123';
+grant all privileges on confluence.* to 'jira'@'localhost' with grant option;
+flush privileges;
+exit;
+
+
+
+[mysqld]
+character-set-server=utf8mb4
+collation-server=utf8mb4_bin
+default-storage-engine=INNODB
+max_allowed_packet=256M
+innodb_log_file_size=2GB
+sql_mode = NO_AUTO_VALUE_ON_ZERO
+transaction-isolation=READ-COMMITTED
+binlog_format=row
+log_bin_trust_function_creators = 1
+
+CREATE DATABASE <database-name> CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+GRANT ALL PRIVILEGES ON <database-name>.* TO '<confluenceuser>'@'localhost' IDENTIFIED BY '<password>';
